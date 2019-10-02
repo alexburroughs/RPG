@@ -35,3 +35,7 @@ bool Keyboard::isUp(int index) {
 bool Keyboard::isDown(int index) {
     return KEYS[index];
 }
+
+bool Keyboard::isClosed() {
+    return closed;
+}
