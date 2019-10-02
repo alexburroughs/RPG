@@ -1,5 +1,8 @@
+#ifndef MAP_H
+#define MAP_H
+
 #include <string>
-#include <fileloader.h>
+#include "fileloader.h"
 
 class Map {
 	
@@ -7,10 +10,12 @@ class Map {
 		int X;
 		int Y;
 		int** tileMap;
-
 	public:
-		Map() {}
-		void loadMap(std::string filename, FileLoader fileLoader) {}
-		int getX() {}
-		int getY() {}
+		Map();
+		void loadMap(std::string filename, FileLoader fileLoader);
+		int getX();
+		int getY();
 };
+
+
+#endif
