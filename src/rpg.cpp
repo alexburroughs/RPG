@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <memory>
 
+#include "keyboard.h"
+
 bool init();
 bool loadMedia();
 void close();
@@ -16,10 +18,15 @@ SDL_Surface* gSurface = NULL;
 int main() {
 
     bool exit = false;
+    auto keystate = std::make_shared<Keyboard>();
 
     init();
 
-    
+    while (!exit) {
+        keystate->update();
+
+        exit = keystate->isDown(SDLK_ESCAPE) || keystate->isClosed(); 
+    }
 
     close();
 }
