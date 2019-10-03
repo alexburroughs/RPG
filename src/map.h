@@ -10,9 +10,10 @@ class Map {
 		int X;
 		int Y;
 		int** tileMap;
+		FileLoader* fileLoader;
 	public:
-		Map();
-		void loadMap(std::string filename, FileLoader fileLoader);
+		Map(FileLoader* fileLoader);
+		void loadMap(std::string filename);
 		int getX();
 		int getY();
 };

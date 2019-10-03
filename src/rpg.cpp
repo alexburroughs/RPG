@@ -9,8 +9,8 @@ bool init();
 bool loadMedia();
 void close();
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gSurface = NULL;
