@@ -21,4 +21,4 @@ all : $(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
 windows : $(OBJS)
-	    $(CC) $(OBJS) $(W_FLAGS) -0 $(W_OBJ_NAME)
+	    $(CC) $(OBJS) $(W_FLAGS) -o $(W_OBJ_NAME)
