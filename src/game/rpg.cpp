@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <memory>
 
-#include "keyboard.h"
+#include "../input/keyboard/keyboard.h"
 
 bool init();
 bool loadMedia();
