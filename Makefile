@@ -1,24 +1,33 @@
-#OBJS specifies which files to compile as part of the project
-OBJS = src/*
+TARGET_EXEC ?= game
 
-#CC specifies which compiler we're using
-CC = g++
+BUILD_DIR ?= ./build
+SRC_DIRS ?= ./src
 
-#COMPILER_FLAGS specifies the additional compilation options we're using
-# -w suppresses all warnings
-COMPILER_FLAGS = -w
+SRCS := $(shell find $(SRC_DIRS) -name *.cpp)
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
 
-#LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lSDL2
-W_FLAGS = -I "library\i686-w64-mingw32\include\SDL2" -L "library\i686-w64-mingw32\lib" -w -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-#OBJ_NAME specifies the name of our exectuable
-OBJ_NAME = game
-W_OBJ_NAME = game.exe
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
+# List of external libraries.
+LIBS := -lstdc++ -lSDL2
 
-#This is the target that compiles our executable
-all : $(OBJS)
-	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+	$(CC) $(OBJS) $(LIBS) -o $@ $(LDFLAGS)
 
-windows : $(OBJS)
-	    $(CC) $(OBJS) $(W_FLAGS) -o $(W_OBJ_NAME)
+# c++ source
+$(BUILD_DIR)/%.cpp.o: %.cpp
+	$(MKDIR_P) $(dir $@)
+	$(CXX) $(CPPFLAGS) $(LIBS) $(CXXFLAGS) -c $< -o $@
+
+
+.PHONY: clean
+
+clean:
+	$(RM) -r $(BUILD_DIR)
+
+-include $(DEPS)
+
+MKDIR_P ?= mkdir -p
