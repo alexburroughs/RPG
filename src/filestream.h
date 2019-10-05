@@ -1,20 +1,21 @@
-#ifndef FILELOADER_H
-#define FILELOADER_H
+#ifndef FILESTREAM_H
+#define FILESTREAM_H
 
 #include <string>
 #include <cstdint>
+#include <memory>
 
 typedef u_int8_t mapbits;
 
 class FileStream {
     public:
-        virtual mapbits** loadMap(std::string filename);
+        virtual std::unique_ptr<mapbits>** loadMap(std::string filename);
         virtual void writeMap(std::string filename, mapbits** arr);
 };
 
 class BinaryStream : public FileStream {
     public:
-        mapbits** loadMap(std::string filename);
+        std::unique_ptr<mapbits>** loadMap(std::string filename);
         void writeMap(std::string filename, mapbits** arr);
 };
 
@@ -22,7 +23,7 @@ class TextStream : public FileStream {
     private:
         
     public:
-        mapbits** loadMap(std::string filename);
+        std::unique_ptr<mapbits>** loadMap(std::string filename);
         void writeMap(std::string filename, mapbits** arr);
 };
 

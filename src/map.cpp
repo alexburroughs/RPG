@@ -1,8 +1,8 @@
 #include <string>
 #include "map.h"
 
-Map::Map(FileLoader* fileLoader) {
-    this->fileLoader = fileLoader;
+Map::Map(FileStream* fileStream) {
+    this->fileStream = fileStream;
 };
 
 int Map::getX() {
