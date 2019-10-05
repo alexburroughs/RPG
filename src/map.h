@@ -3,7 +3,6 @@
 
 #include <string>
 
-
 class Map {
 	private:
 		int X;
