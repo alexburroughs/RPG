@@ -9,7 +9,6 @@ class Map {
 	private:
 		int X;
 		int Y;
-		int** tileMap;
 		FileStream* fileStream;
 	public:
 		Map(FileStream* fileStream);
