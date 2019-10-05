@@ -2,20 +2,21 @@
 #define MAP_H
 
 #include <string>
-#include "filestream.h"
 
 class Map {
-	
 	private:
 		int X;
 		int Y;
+<<<<<<< HEAD
 		FileStream* fileStream;
+=======
+		int** tileMap;
+>>>>>>> master
 	public:
-		Map(FileStream* fileStream);
-		void loadMap(std::string filename);
+		Map();
+		Map(std::string file_name);
 		int getX();
 		int getY();
 };
-
 
 #endif

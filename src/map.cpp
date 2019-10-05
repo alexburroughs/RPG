@@ -1,9 +1,7 @@
 #include <string>
 #include "map.h"
 
-Map::Map(FileStream* fileStream) {
-    this->fileStream = fileStream;
-};
+Map::Map() {};
 
 int Map::getX() {
     return X;
@@ -13,6 +11,6 @@ int Map::getY() {
     return Y;
 };
 
-void Map::loadMap(std::string filename) {
+Map::Map(std::string filename) {
 
 } 
