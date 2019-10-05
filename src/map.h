@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include <string>
-#include "fileloader.h"
+#include "filestream.h"
 
 class Map {
 	
@@ -10,9 +10,10 @@ class Map {
 		int X;
 		int Y;
 		int** tileMap;
+		FileStream* fileStream;
 	public:
-		Map();
-		void loadMap(std::string filename, FileLoader fileLoader);
+		Map(FileStream* fileStream);
+		void loadMap(std::string filename);
 		int getX();
 		int getY();
 };
