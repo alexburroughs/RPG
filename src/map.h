@@ -7,11 +7,7 @@ class Map {
 	private:
 		int X;
 		int Y;
-<<<<<<< HEAD
-		FileStream* fileStream;
-=======
 		int** tileMap;
->>>>>>> master
 	public:
 		Map();
 		Map(std::string file_name);

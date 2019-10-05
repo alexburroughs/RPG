@@ -1,8 +1,13 @@
 #ifndef CHUNK_H
 #define CHUNK_H
 
-#include "filestream.h"
-#include <map>
+#include "filereader.h"
+#include <unordered_map>
+#include <cinttypes>
+
+typedef uint16_t mapbits;
+
+constexpr int CHUNK_SIZE = 64;
 
 enum Direction {
     UP,
@@ -11,14 +16,30 @@ enum Direction {
     RIGHT
 };
 
+Direction get_inverse(Direction direction) {
+    switch (direction) {
+        case UP:
+            return DOWN;
+        case DOWN:
+            return UP;
+        case LEFT:
+            return RIGHT;
+        case RIGHT:
+            return LEFT;
+    }
+}
+
 class Chunk {
     private:
-        mapbits** map;
-        std::map<Direction, Chunk*> links;
+        mapbits** data;
+        std::unordered_map<Direction, Chunk*> links;
     public:
-        Chunk(mapbits** map);
+        Chunk(mapbits** data);
         void add_link(Direction direction, Chunk* chunk);
         void remove_link(Direction direction);
+        void remove();
+        bool is_valid_link(Direction direction);
+        Chunk* get_link(Direction direction);
         ~Chunk();
 };
 
