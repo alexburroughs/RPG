@@ -11,6 +11,6 @@ int Map::getY() {
     return Y;
 };
 
-void Map::loadMap(std::string filename, FileLoader fileLoader) {
+Map::Map(std::string filename) {
 
 } 
