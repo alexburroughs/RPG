@@ -39,6 +39,8 @@ class Chunk {
         void remove_link(Direction direction);
         void remove();
         bool is_valid_link(Direction direction);
+        void set_data(mapbits** data);
+        mapbits** get_data();
         Chunk* get_link(Direction direction);
         ~Chunk();
 };

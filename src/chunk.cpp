@@ -1,5 +1,6 @@
-#include <chunk.h>
+#include "chunk.h"
 #include "debug.h"
+#include <unordered_map>
 
 Chunk::Chunk(mapbits** data) {
     this->data = data;
@@ -42,13 +43,21 @@ Chunk* Chunk::get_link(Direction direction) {
 
 }
 
+void Chunk::set_data(mapbits** data) {
+    this->data = data;
+}
+
+mapbits** Chunk::get_data() {
+    return data;
+}
+
 Chunk::~Chunk() {
 
     if (data != NULL) {
         for (int i = 0; i < CHUNK_SIZE; i++) {
-
-            if (data[i])
-            delete[] data[i];
+            if (data[i] != NULL)
+            
+                delete[] data[i];
         }
 
         delete[] data;
