@@ -5,7 +5,7 @@
 #include "binaryreader.h"
 
 
-BinaryReader::BinaryReader() : FileReader() { }\
+BinaryReader::BinaryReader() : Reader() { }
 
 
 /**

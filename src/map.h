@@ -2,24 +2,27 @@
 #define MAP_H
 
 #include <string>
-#include "chunk.h"
 #include <unordered_map>
-#include <utility>
+#include "vector2.h"
+
+typedef uint16_t mapbits;
 
 class Map {
 	private:
-		int X;
-		int Y;
-		std::unordered_map<std::pair<int, int>, Chunk*> chunk_map;
-		void load_chunk(std::pair<int, int> chunk_pos);
-		void unload_chunk(std::pair<int, int> chunk_pos);
+		mapbits** tiles;
+		Vector2 dimensions;
+		Vector2 location;
+		Vector2 fov;
+
 	public:
-		Map(std::pair<int,int> player_pos);
-		Map(std::string file_name, std::pair<int,int> player_pos);
-		int getX();
-		int getY();
+		Map(Vector2 dimensions, mapbits** tiles);
+		Map(Vector2 dimensions, mapbits** tiles, Vector2 location);
+		Map(Vector2 dimensions, mapbits** tiles, Vector2 location, Vector2 fov);
+		Vector2 get_dimensions();
+		Vector2 get_fov();
+		void set_fov(Vector2 fov);
 		mapbits** get_drawable();
-		void update_chunks(std::pair<int, int> player_pos);
+		void update_position(Vector2 location);
 };
 
 #endif

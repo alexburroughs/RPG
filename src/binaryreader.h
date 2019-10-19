@@ -2,10 +2,10 @@
 #define BINARYREADER_H
 
 #include <string>
-#include "filereader.h"
+#include "reader.h"
 
 
-class BinaryReader : public FileReader {
+class BinaryReader : public Reader {
     public:
     BinaryReader();
     char* read(const std::string file_name, long position, long length);

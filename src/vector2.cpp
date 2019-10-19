@@ -5,6 +5,10 @@ Vector2::Vector2(int16_t x, int16_t y) {
     Y = y;
 }
 
+Vector2::Vector2(){
+
+}
+
 int16_t Vector2::getX() {
     return X;
 }

@@ -10,6 +10,7 @@ class Vector2 {
         int16_t Y;
     public:
         Vector2(int16_t x, int16_t y);
+        Vector2();
 
         int16_t getX ();
         int16_t getY ();
