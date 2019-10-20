@@ -1,17 +1,23 @@
+#include "debug.h"
 #include <fstream>
 #include <string>
 #include <sys/stat.h>
+#include <sstream>
+#include <iterator>
+#include <algorithm>
+#include <deque> 
+#include "util.h"
 
-#include "textreader.h"
+#include "csvreader.h"
 
 
-TextReader::TextReader() : FileReader() { }
+CsvReader::CsvReader() : Reader() { }
 
 
 /**
  * Reads binary files from any position and of any length within the corresponding file.
  **/
-char* TextReader::read(const std::string file_name, long position, long length) {
+char* CsvReader::read(const std::string file_name, long position, long length) {
     // Check file size and reading size.
     off_t size = file_size(file_name);
     if (size > 0 && position + length <= size) {
@@ -29,12 +35,27 @@ char* TextReader::read(const std::string file_name, long position, long length) 
     return new char[1]{ '\0' };
 }
 
-char* TextReader::read(std::string file_name) {
+char* CsvReader::read(std::string file_name) {
     off_t size = file_size(file_name);
     if (size > 0)
         return read(file_name, 0, size);
     return new char[1]{ '\0' };
 }
 
+std::deque<mapbits>* CsvReader::readnums(std::string filename) {
 
-TextReader::~TextReader() { }
+    char delim(',');
+    std::string csv(read(filename));
+    std::deque<mapbits>* deq = new std::deque<mapbits>();
+
+    std::stringstream ss(csv);
+    std::string token;
+    
+    while (std::getline(ss, token, delim)) {
+        deq->push_back(str_to_mapbits(token));
+    }
+
+    return deq;
+}
+
+CsvReader::~CsvReader() { }

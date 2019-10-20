@@ -1,15 +1,17 @@
-#ifndef FILEREADER_H
-#define FILEREADER_H
-
+#ifndef READER_H
+#define READER_H
 
 #include <string>
+#include <deque>
+#include "map.h"
 
-class FileReader {
+class Reader {
     public:
-    FileReader();
+    Reader();
     virtual char* read(const std::string file_name, long position, long length) = 0;
     virtual char* read(std::string file_name) = 0;
-    ~FileReader();
+    virtual std::deque<mapbits>* readnums(std::string filename) = 0;
+    ~Reader();
 
     protected:
     off_t file_size(std::string file_name);
