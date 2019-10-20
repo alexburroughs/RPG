@@ -6,6 +6,7 @@
 #include <iterator>
 #include <algorithm>
 #include <deque> 
+#include "util.h"
 
 #include "csvreader.h"
 
@@ -41,7 +42,7 @@ char* CsvReader::read(std::string file_name) {
     return new char[1]{ '\0' };
 }
 
-std::deque<mapbits>* CsvReader::readmap(std::string filename) {
+std::deque<mapbits>* CsvReader::readnums(std::string filename) {
 
     char delim(',');
     std::string csv(read(filename));
@@ -55,22 +56,6 @@ std::deque<mapbits>* CsvReader::readmap(std::string filename) {
     }
 
     return deq;
-}
-
-mapbits str_to_mapbits(std::string inp) {
-
-    int i(std::stoi(inp));
-    mapbits to(0);
-    
-    if (i <= static_cast<int>(UINT16_MAX) && i >=0) {
-        to = static_cast<mapbits>(i);
-    }
-    else {
-        DEBUG("Error: Map value to large for uint16");
-        std::exit(1);
-    }
-
-    return to;
 }
 
 CsvReader::~CsvReader() { }

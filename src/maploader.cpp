@@ -10,7 +10,7 @@ Maploader::Maploader(Reader* reader) {
 
 Map* Maploader::loadmap(std::string filename) {
 
-   std::deque<mapbits>* deq = reader->readmap(filename);
+   std::deque<mapbits>* deq = reader->readnums(filename);
 
     mapbits x = deq->front();
     deq->pop_front();
