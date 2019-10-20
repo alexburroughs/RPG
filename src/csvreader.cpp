@@ -6,6 +6,7 @@
 #include <iterator>
 #include <algorithm>
 #include <deque> 
+#include <unordered_map>
 #include "util.h"
 
 #include "csvreader.h"
@@ -56,6 +57,45 @@ std::deque<mapbits>* CsvReader::readnums(std::string filename) {
     }
 
     return deq;
+}
+
+std::unordered_map<std::string,std::string>* CsvReader::readkv(std::string filename) {
+    
+    std::unordered_map<std::string, std::string>* map = new std::unordered_map<std::string, std::string>();
+    char delim('\n');
+    char delimkv('=');
+    std::string str(read(filename));
+
+    std::stringstream ss(str);
+    std::string token;
+
+    std::deque<std::string> lines;
+
+    while (std::getline(ss, token, delim)) {
+        lines.push_back(token);
+    }
+
+    int size = lines.size();
+
+    for (int16_t i = 0; i < size; i++) {
+
+        std::string tmp;
+        std::stringstream ess(lines.front());
+
+        std::getline(ess, tmp, delimkv);
+        std::string k = tmp;
+        std::getline(ess, tmp, delimkv);
+        std::string v = tmp;
+
+        DEBUG(k)
+        DEBUG(v)
+
+        (*map)[k] = v;
+
+        lines.pop_front();
+    }
+
+    return map;
 }
 
 CsvReader::~CsvReader() { }

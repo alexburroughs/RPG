@@ -5,12 +5,15 @@
 
 #include "keyboard.h"
 
-bool init();
+#include "settings.h"
+#include "settingsloader.h"
+#include "reader.h"
+#include "csvreader.h"
+#include "debug.h"
+
+bool init(int SCREEN_WIDTH, int SCREEN_HEIGHT);
 bool loadMedia();
 void close();
-
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1080;
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gSurface = NULL;
@@ -18,9 +21,20 @@ SDL_Surface* gSurface = NULL;
 int main() {
 
     bool exit = false;
-    auto keystate = std::make_shared<Keyboard>();
+    Settingsloader sl(new CsvReader());
 
-    init();
+    auto keystate = std::make_shared<Keyboard>();
+    Settings* settings = sl.loadsettings("config/game.properties");
+    DEBUG("wtests")
+    DEBUG(settings->get_value("screen_width"))
+    DEBUG("wteste")
+
+    int SCREEN_WIDTH = stoi(settings->get_value("screen_width"));
+    int SCREEN_HEIGHT = stoi(settings->get_value("screen_height"));
+
+    DEBUG(settings->get_value("screen_width"))
+
+    init(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     while (!exit) {
         keystate->update();
@@ -31,7 +45,7 @@ int main() {
     close();
 }
 
-bool init() {
+bool init(int SCREEN_WIDTH, int SCREEN_HEIGHT) {
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 
