@@ -15,9 +15,8 @@ jobs:
     - run: wget https://www.libsdl.org/release/SDL2-2.0.10.tar.gz -O SDL2-2.0.10.tar.gz
     - run: tar -xzvf SDL2-2.0.10.tar.gz
     - run: (cd SDL2-2.0.10 && ./configure && make && sudo make install)
-    - name: make
-      run: make
-    - run: (cd .. && wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.tar.gz -O SDL2_image-2.0.5.tar.gz)
+    - run: wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.tar.gz -O SDL2_image-2.0.5.tar.gz
     - run: tar -xzvf SDL2_image-2.0.5.tar.gz
     - run: (cd SDL2_image-2.0.5 && ./configure && make && sudo make install && cd ..)
-      
+    - name: make
+      run: make
