@@ -1,6 +1,7 @@
 #include <string>
 #include "map.h"
 #include "vector2.h"
+#include "drawable.h"
 
 Map::Map(Vector2 dimensions, mapbits** tiles) {
     this->dimensions = dimensions;
@@ -55,4 +56,8 @@ mapbits** Map::get_drawable() {
     }
 
     return arr;
+}
+
+void Map::draw() {
+    mapbits** map = get_drawable();
 }

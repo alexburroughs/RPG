@@ -4,15 +4,17 @@
 #include <string>
 #include <unordered_map>
 #include "vector2.h"
+#include "drawable.h"
 
 typedef uint16_t mapbits;
 
-class Map {
+class Map : public Drawable {
 	private:
 		mapbits** tiles;
 		Vector2 dimensions;
 		Vector2 location;
 		Vector2 fov;
+		Vector2 origin;
 
 	public:
 		Map(Vector2 dimensions, mapbits** tiles);
@@ -23,6 +25,7 @@ class Map {
 		void set_fov(Vector2 fov);
 		mapbits** get_drawable();
 		void update_position(Vector2 location);
+		void draw();
 };
 
 #endif

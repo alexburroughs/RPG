@@ -1,0 +1,10 @@
+2020-04-19 10:44:41 [INFO]:Skipping tags
+2020-04-19 10:44:41 [INFO]:loaded screen_width = 800
+2020-04-19 10:44:41 [INFO]:loaded screen_height = 600
+2020-04-19 10:44:41 [INFO]:Processing tag: Tiles
+2020-04-19 10:44:41 [INFO]:Reached tag
+2020-04-19 10:44:41 [INFO]:loaded grass = assets/tiles/Grass.png
+2020-04-19 10:44:41 [INFO]:loaded path = assets/tiles/Path.png
+2020-04-19 10:44:41 [INFO]:Accessed screen width
+2020-04-19 10:44:41 [INFO]:SDL initialized
+2020-04-19 10:44:41 [INFO]:Window created

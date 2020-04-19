@@ -19,7 +19,7 @@ Map* Maploader::loadmap(std::string filename) {
     deq->pop_front();
 
     Vector2 dimensions(x,y);
-
+ 
     mapbits** arr;
 
     arr = new mapbits*[x];
