@@ -8,9 +8,9 @@ Settingsloader::Settingsloader(Reader* reader) {
     this->reader = reader;
 }
 
-Settings* Settingsloader::loadsettings(std::string filename) {
+Settings* Settingsloader::loadsettings(std::string filename, std::string tag) {
 
-    std::unordered_map<std::string, std::string>* map = reader->readkv(filename);
+    std::unordered_map<std::string, std::string>* map = reader->readkv(filename, tag);
 
     return new Settings(map);
 }

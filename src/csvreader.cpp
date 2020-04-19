@@ -59,11 +59,14 @@ std::deque<mapbits>* CsvReader::readnums(std::string filename) {
     return deq;
 }
 
-std::unordered_map<std::string,std::string>* CsvReader::readkv(std::string filename) {
+std::unordered_map<std::string,std::string>* CsvReader::readkv(std::string filename, std::string tag) {
     
-    std::unordered_map<std::string, std::string>* map = new std::unordered_map<std::string, std::string>();
     char delim('\n');
     char delimkv('=');
+    char tagind('#');
+   
+    std::unordered_map<std::string, std::string>* map = new std::unordered_map<std::string, std::string>();
+    
     std::string str(read(filename));
 
     std::stringstream ss(str);
@@ -71,7 +74,24 @@ std::unordered_map<std::string,std::string>* CsvReader::readkv(std::string filen
 
     std::deque<std::string> lines;
 
+    bool skipping;
+    bool processing = skipping = tag == "";
+
+    DEBUG((processing ? "Skipping tags" : "Processing tag: " + tag))
+
     while (std::getline(ss, token, delim)) {
+        if (!processing) {
+            processing = token == tagind + tag;
+            DEBUG("Reached tag")
+            continue;
+        }
+        
+        if (token.at(0) == tagind) {
+            if (skipping)
+                continue;
+            break;
+        }
+
         lines.push_back(token);
     }
 
@@ -79,16 +99,16 @@ std::unordered_map<std::string,std::string>* CsvReader::readkv(std::string filen
 
     for (int16_t i = 0; i < size; i++) {
 
-        std::string tmp;
+        std::string current;
         std::stringstream ess(lines.front());
 
-        std::getline(ess, tmp, delimkv);
-        std::string k = tmp;
-        std::getline(ess, tmp, delimkv);
-        std::string v = tmp;
+        std::getline(ess, current, delimkv);
+        std::string k = current;
 
-        DEBUG(k)
-        DEBUG(v)
+        std::getline(ess, current, delimkv);
+        std::string v = current;
+
+        DEBUG("loaded " + k + " = " + v)
 
         (*map)[k] = v;
 

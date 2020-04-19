@@ -10,7 +10,7 @@ class Settingsloader {
         Reader* reader;
     public:
         Settingsloader(Reader* reader);
-        Settings* loadsettings(std::string filename);
+        Settings* loadsettings(std::string filename, std::string tag);
 };
 
 #endif

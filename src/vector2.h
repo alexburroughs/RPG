@@ -6,19 +6,19 @@
 
 class Vector2 {
     private:
-        int16_t X;
-        int16_t Y;
+        int32_t X;
+        int32_t Y;
     public:
-        Vector2(int16_t x, int16_t y);
+        Vector2(int32_t x, int32_t y);
         Vector2();
 
-        int16_t getX ();
-        int16_t getY ();
+        int32_t getX ();
+        int32_t getY ();
 
-        int32_t getCombined ();
+        int64_t getCombined ();
 
-        void setX (int16_t x);
-        void setY (int16_t y);
+        void setX (int32_t x);
+        void setY (int32_t y);
         bool operator==(Vector2 &other) const;
 };
 
@@ -35,7 +35,7 @@ namespace std {
       using std::size_t;
       using std::hash;
 
-      return ((hash<int16_t>()(k.getX()) ^ (hash<int16_t>()(k.getY()) << 1)) >> 1);
+      return ((hash<int32_t>()(k.getX()) ^ (hash<int32_t>()(k.getY()) << 1)) >> 1);
     }
   };
 }

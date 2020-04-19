@@ -17,7 +17,7 @@ class CsvReader : public Reader {
     public:
         CsvReader();
         std::deque<mapbits>* readnums(std::string filename);
-        std::unordered_map<std::string, std::string>* readkv(std::string filename);
+        std::unordered_map<std::string, std::string>* readkv(std::string filename, std::string tag);
         ~CsvReader();
 };
 

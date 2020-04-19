@@ -12,7 +12,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
 # List of external libraries.
-LIBS := -lstdc++ -lSDL2
+LIBS := -lstdc++ -lSDL2_image -lSDL2
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) $(LIBS) -o $@ $(LDFLAGS)
